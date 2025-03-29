@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "id": "d949",
+      "firstName": "sushank",
+      "lastName": "gurung",
+      "email": "asd@gmail.com",
+      "password": "asdasd",
+      "confirmPassword": "asdasd"
+    }
+  ]
+}
