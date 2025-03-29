@@ -20,6 +20,7 @@ export const validateFormData = (formData, isSignup = false) => {
   if (!formData.password) {
     errors.password = "Password is required";
   }
+
   if (isSignup) {
     if (!formData.confirmPassword) {
       errors.confirmPassword = "Confirm Password is required";
