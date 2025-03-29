@@ -22,7 +22,7 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formErrors = validateFormData(formData);
+    const formErrors = validateFormData(formData, true);
 
     console.log("Validation Errors:", formErrors);
 

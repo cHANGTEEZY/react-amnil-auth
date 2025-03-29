@@ -1,11 +1,13 @@
-export const validateFormData = (formData) => {
+export const validateFormData = (formData, isSignup = false) => {
   let errors = {};
 
-  if (!formData.firstName.trim()) {
-    errors.firstName = "First name is required";
-  }
-  if (!formData.lastName.trim()) {
-    errors.lastName = "Last name is required";
+  if (isSignup) {
+    if (!formData.firstName.trim()) {
+      errors.firstName = "First name is required";
+    }
+    if (!formData.lastName.trim()) {
+      errors.lastName = "Last name is required";
+    }
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -17,14 +19,13 @@ export const validateFormData = (formData) => {
 
   if (!formData.password) {
     errors.password = "Password is required";
-  } else if (formData.password.length < 6) {
-    errors.password = "Password must be at least 6 characters long";
   }
-
-  if (!formData.confirmPassword) {
-    errors.confirmPassword = "Confirm Password is required";
-  } else if (formData.password !== formData.confirmPassword) {
-    errors.confirmPassword = "Passwords do not match";
+  if (isSignup) {
+    if (!formData.confirmPassword) {
+      errors.confirmPassword = "Confirm Password is required";
+    } else if (formData.password !== formData.confirmPassword) {
+      errors.confirmPassword = "Passwords do not match";
+    }
   }
 
   return errors;
