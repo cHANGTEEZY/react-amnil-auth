@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Input from "../Components/Input";
 import { validateFormData } from "../utils/validateFormData";
 import Header from "../Components/Header";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../Context/AuthContext";
 
 const Signup = () => {
+  const { isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  });
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",

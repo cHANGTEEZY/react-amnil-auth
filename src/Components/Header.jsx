@@ -1,25 +1,20 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import "./Header.css"
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import "./Header.css";
+import AuthContext from "../Context/AuthContext";
 
 export default function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
-  const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const token = localStorage.getItem("token")
-    setIsLoggedIn(!!token)
-  }, [])
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
-    localStorage.removeItem("token")
-    setIsLoggedIn(false)
-    setMenuOpen(false)
-  }
-
+    localStorage.removeItem("userAuthToken");
+    setIsAuthenticated(false);
+    setMenuOpen(false);
+  };
 
   return (
     <header className="header">
@@ -28,7 +23,10 @@ export default function Header() {
           <span className="logo-text">Amnil Technology</span>
         </div>
 
-        <div className={`menu-toggle ${menuOpen ? "active" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
+        <div
+          className={`menu-toggle ${menuOpen ? "active" : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
@@ -36,7 +34,7 @@ export default function Header() {
 
         <nav className={`nav ${menuOpen ? "active" : ""}`}>
           <ul className="nav-list">
-            {!isLoggedIn ? (
+            {!isAuthenticated ? (
               <>
                 <li className="nav-item">
                   <Link to="/signin" className="nav-link">
@@ -60,5 +58,5 @@ export default function Header() {
         </nav>
       </div>
     </header>
-  )
+  );
 }

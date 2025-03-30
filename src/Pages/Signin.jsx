@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+
 import Input from "../Components/Input";
 import { validateFormData } from "../utils/validateFormData";
 import Header from "../Components/Header";
+import AuthContext from "../Context/AuthContext";
 
 const Signin = () => {
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -44,12 +57,11 @@ const Signin = () => {
       }
 
       localStorage.setItem("userAuthToken", users[0].id);
-
+      setIsAuthenticated(true);
       setFormData({
         email: "",
         password: "",
       });
-
       setErrors({});
     } catch (error) {
       console.error("Error during sign-in:", error);
