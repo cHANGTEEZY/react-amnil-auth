@@ -1,0 +1,96 @@
+.user-details-cards div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: .76rem;
+}
+
+.user-detail-card {
+    color: rgb(15, 15, 15);
+    padding: 1.4rem;
+    text-align: center;
+    background-color: rgb(112, 69, 182);
+    border-radius: .8rem;
+    position: absolute;
+    transition: transform 400ms ease-in-out;
+    font-size: 2rem;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.user-detail-card:first-child {
+    box-shadow: 0px 0px 10px 8px rgb(95, 80, 150);
+     background-color: rgb(85, 38, 161);
+    z-index: 10;
+    width: 23rem;
+}
+
+.user-detail-card:nth-child(2) {
+    transform: translateY(-18px);
+    z-index: 9;
+    width: 20rem;
+   }
+.user-detail-card:nth-child(3) {
+    transform: translateY(-28px);
+    z-index: 8;
+   
+    width: 18rem;
+    
+}
+.user-detail-card:nth-child(4) {
+    transform: translateY(-38px);
+    z-index: 7;
+    
+    width: 15rem;
+    
+}
+
+.user-detail-card.animate-button {
+    position: relative;
+    transform: translateY(0);
+    z-index: auto;
+    width: 23rem;
+   
+}
+
+.user-detail-card.animate-button:first-child {
+    animation: bounce 0.5s ease-in-out;
+   
+}
+
+.user-detail-card.animate-button:last-child {
+    animation: opposite-bounce 0.5s ease-in-out;
+}
+
+.user-detail-card.animate-button:has(.chevron) .chevron {
+    rotate: 90deg;
+    transition: rotate ease 250ms;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(30px);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes opposite-bounce {
+    0% {
+        transform: translateY(-30px);
+    }
+    50% {
+        transform: translateY(30px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
