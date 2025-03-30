@@ -157,7 +157,6 @@ form {
   margin-top: 4px;
 }
 
-/* Submit Button */
 .submit-button {
   background-color: #7b68ee;
   color: white;
@@ -181,7 +180,6 @@ form {
   background-color: #5a4fcb;
 }
 
-/* Input Group (for side-by-side inputs) */
 .input-group {
   display: flex;
   gap: 15px;
