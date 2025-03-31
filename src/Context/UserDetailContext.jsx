@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import BASE_URL from "../constants/API";
 
 const UserDetailContext = createContext();
 
@@ -9,15 +10,12 @@ export const UserDetailProvider = ({ children }) => {
     const fetchUserDetails = async () => {
       const token = localStorage.getItem("userAuthToken");
       try {
-        const response = await fetch(
-          `http://localhost:3000/users?id=${token}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`${BASE_URL}/users?id=${token}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         const data = await response.json();
         setUserDetails(data);
       } catch (error) {
@@ -26,7 +24,7 @@ export const UserDetailProvider = ({ children }) => {
     };
 
     fetchUserDetails();
-  }, []);
+  }, [userDetails, setUserDetails]);
 
   return (
     <UserDetailContext.Provider value={{ userDetails, setUserDetails }}>

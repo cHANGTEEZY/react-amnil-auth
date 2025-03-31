@@ -1,4 +1,5 @@
 import "../css/auth.css";
+import BASE_URL from "../constants/API";
 
 import React, { useState, useEffect, useContext } from "react";
 import Input from "../Components/Input";
@@ -6,6 +7,7 @@ import { validateFormData } from "../utils/validateFormData";
 import Header from "../Components/Header";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../Context/AuthContext";
+import ErrorPage from "./Error";
 
 const Signup = () => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -26,6 +28,7 @@ const Signup = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFormData = (e) => {
@@ -48,7 +51,7 @@ const Signup = () => {
 
     try {
       const existingUserResponse = await fetch(
-        `http://localhost:3000/users?email=${formData.email}`
+        `${BASE_URL}/users?email=${formData.email}`
       );
       const existingUsers = await existingUserResponse.json();
 
@@ -57,7 +60,7 @@ const Signup = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:3000/users", {
+      const response = await fetch(`${BASE_URL}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,10 +85,15 @@ const Signup = () => {
       setErrors({});
     } catch (error) {
       console.error(error.message);
+      setServerError(error.message);
     } finally {
       setIsLoading(false);
     }
   };
+
+  if (serverError) {
+    return <ErrorPage code={500} title="server error" message={serverError} />;
+  }
 
   return (
     <>

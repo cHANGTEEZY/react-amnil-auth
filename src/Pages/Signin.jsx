@@ -7,6 +7,8 @@ import Input from "../Components/Input";
 import { validateFormData } from "../utils/validateFormData";
 import Header from "../Components/Header";
 import AuthContext from "../Context/AuthContext";
+import ErrorPage from "./Error";
+import BASE_URL from "../constants/API";
 
 const Signin = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
@@ -24,6 +26,7 @@ const Signin = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFormData = (e) => {
@@ -35,17 +38,23 @@ const Signin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setServerError(null);
 
     const formErrors = validateFormData(formData);
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
       return;
     }
+
     setIsLoading(true);
     try {
       const response = await fetch(
-        `http://localhost:3000/users?email=${formData.email}&password=${formData.password}`
+        `${BASE_URL}/users?email=${formData.email}&password=${formData.password}`
       );
+
+      if (!response.ok) {
+        throw new Error("Server error: Unable to check user details.");
+      }
 
       const users = await response.json();
 
@@ -59,18 +68,19 @@ const Signin = () => {
 
       localStorage.setItem("userAuthToken", users[0].id);
       setIsAuthenticated(true);
-      setFormData({
-        email: "",
-        password: "",
-      });
+      setFormData({ email: "", password: "" });
       setErrors({});
     } catch (error) {
       console.error("Error during sign-in:", error);
-      setErrors({ email: "Something went wrong. Please try again later." });
+      setServerError(error.message);
     } finally {
       setIsLoading(false);
     }
   };
+
+  if (serverError) {
+    return <ErrorPage code={500} title="Server Error" message={serverError} />;
+  }
 
   return (
     <>
@@ -112,7 +122,7 @@ const Signin = () => {
                 className="submit-button"
                 disabled={isLoading}
               >
-                {isLoading ? "Logging in...." : "Sign In"}
+                {isLoading ? "Logging in..." : "Sign In"}
               </button>
             </form>
           </div>
