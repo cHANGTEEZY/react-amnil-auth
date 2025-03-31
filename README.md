@@ -23,7 +23,7 @@ This is a simple authentication project built with React. It includes user authe
    ```
 3. **Start JSON Server (Backend):**
    ```sh
-   json-server --watch db.json --port 5000
+   json-server --watch db.json
    ```
 4. **Run the React App:**
    ```sh
