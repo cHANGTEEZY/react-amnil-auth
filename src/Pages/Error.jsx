@@ -1,6 +1,6 @@
+import "../css/ErrorPage.css";
+
 import React from "react";
-import { Link } from "react-router-dom";
-import "./ErrorPage.css";
 import { FileWarning } from "lucide-react";
 
 const ErrorPage = ({

@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import "../css/auth.css";
 
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Input from "../Components/Input";

@@ -1,5 +1,4 @@
-import "./auth.css";
-import "./index.css"
+import "./index.css";
 
 import React from "react";
 import App from "./App";

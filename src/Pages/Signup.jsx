@@ -1,3 +1,5 @@
+import "../css/auth.css";
+
 import React, { useState, useEffect, useContext } from "react";
 import Input from "../Components/Input";
 import { validateFormData } from "../utils/validateFormData";
