@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Input from "../Components/Input";
+import Button from "../Components/Button";
 import { validateFormData } from "../utils/validateFormData";
 import Header from "../Components/Header";
 import AuthContext from "../Context/AuthContext";
@@ -117,13 +118,9 @@ const Signin = () => {
                 error={errors.password}
               />
 
-              <button
-                type="submit"
-                className="submit-button"
-                disabled={isLoading}
-              >
+              <Button disabled={isLoading} className={"submit-button"}>
                 {isLoading ? "Logging in..." : "Sign In"}
-              </button>
+              </Button>
             </form>
           </div>
         </div>

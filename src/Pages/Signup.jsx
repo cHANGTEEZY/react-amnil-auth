@@ -3,11 +3,13 @@ import BASE_URL from "../constants/API";
 
 import React, { useState, useEffect, useContext } from "react";
 import Input from "../Components/Input";
+import Button from "../Components/Button";
 import { validateFormData } from "../utils/validateFormData";
 import Header from "../Components/Header";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../Context/AuthContext";
 import ErrorPage from "./Error";
+
 
 const Signup = () => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -156,13 +158,9 @@ const Signup = () => {
                 onChange={handleFormData}
                 error={errors.confirmPassword}
               />
-              <button
-                type="submit"
-                className="submit-button"
-                disabled={isLoading}
-              >
+             <Button disabled={isLoading} className={"submit-button"}>
                 {isLoading ? "Creating..." : "Create account"}
-              </button>
+              </Button>
             </form>
           </div>
         </div>
