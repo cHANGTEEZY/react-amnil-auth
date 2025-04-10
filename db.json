@@ -15,6 +15,14 @@
       "email": "asd@gmaila.cas",
       "password": "asdasd",
       "confirmPassword": "asdasd"
+    },
+    {
+      "id": "ac86",
+      "firstName": "lol",
+      "lastName": "lol",
+      "email": "lol@gmail.com",
+      "password": "lol",
+      "confirmPassword": "lol"
     }
   ]
 }

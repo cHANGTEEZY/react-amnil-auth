@@ -1,4 +1,4 @@
-const mode = "dev";
+const mode = "prod";
 
 const BASE_URL =
   mode === "prod"
